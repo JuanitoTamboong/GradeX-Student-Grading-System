@@ -99,6 +99,10 @@ body {
 .brand-logo i {
     color: var(--primary-blue);
 }
+.brand-logo img{
+    height: auto;
+    width: 50px;
+}
 
 .login-header h2 {
     font-size: 24px;
