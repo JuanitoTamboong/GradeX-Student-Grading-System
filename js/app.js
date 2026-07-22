@@ -115,8 +115,7 @@ function showApp(user) {
     // Update user info
     document.getElementById('userName').textContent = user.name;
     document.getElementById('userRole').textContent = 
-        user.role === 'admin' ? 'Administrator' : 
-        user.role === 'teacher' ? 'Teacher' : 'Student';
+        user.role === 'admin' ? 'Administrator' : 'Teacher';
     document.getElementById('userAvatar').textContent = user.avatar || user.name.charAt(0);
     
     // Setup role-based visibility
@@ -138,18 +137,7 @@ function setupRoleBasedAccess(role) {
     const navItems = document.querySelectorAll('.nav-item');
     
     navItems.forEach(item => {
-        const page = item.dataset.page;
-        
-        if (role === 'student') {
-            // Students can only see Dashboard, Grades, Reports
-            if (page === 'students' || page === 'subjects' || page === 'settings') {
-                item.style.display = 'none';
-            } else {
-                item.style.display = 'flex';
-            }
-        } else {
-            item.style.display = 'flex';
-        }
+        item.style.display = 'flex';
     });
 }
 
@@ -291,15 +279,15 @@ function calculateDashboardStats() {
     
     return {
         totalStudents: GradeX.students.length,
-        studentChange: 12,
+        studentChange: 0,
         totalSubjects: GradeX.subjects.length,
-        subjectChange: 8,
+        subjectChange: 0,
         totalGrades: grades.length,
-        gradeChange: 15,
+        gradeChange: 0,
         passingRate: grades.length > 0 ? Math.round((passingGrades.length / grades.length) * 100) : 0,
-        passingChange: 5,
+        passingChange: 0,
         averageGrade: grades.length > 0 ? Math.round(grades.reduce((sum, g) => sum + g.total, 0) / grades.length) : 0,
-        activeTeachers: 6
+        activeTeachers: 0
     };
 }
 

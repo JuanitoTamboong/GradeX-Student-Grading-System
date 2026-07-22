@@ -13,20 +13,15 @@ function initializeDashboard() {
         return;
     }
     
-    // Load saved data from localStorage
     loadFromStorage();
     
-    // Update user info
     document.getElementById('userName').textContent = user.name;
     document.getElementById('userRole').textContent = 
-        user.role === 'admin' ? 'Administrator' : 
-        user.role === 'teacher' ? 'Teacher' : 'Student';
+        user.role === 'admin' ? 'Administrator' : 'Teacher';
     document.getElementById('userAvatar').textContent = user.avatar || user.name.charAt(0);
     
-    // Setup role-based visibility
     setupRoleBasedAccess(user.role);
     
-    // Setup navigation
     document.querySelectorAll('.nav-item').forEach(item => {
         item.addEventListener('click', (e) => {
             e.preventDefault();
@@ -64,12 +59,7 @@ function handleLogout() {
 function setupRoleBasedAccess(role) {
     const navItems = document.querySelectorAll('.nav-item');
     navItems.forEach(item => {
-        const page = item.dataset.page;
-        if (role === 'student') {
-            item.style.display = (page === 'students' || page === 'subjects' || page === 'settings') ? 'none' : 'flex';
-        } else {
-            item.style.display = 'flex';
-        }
+        item.style.display = 'flex';
     });
 }
 
@@ -185,23 +175,6 @@ function loadDashboard() {
     
     loadRecentGrades();
     loadPerformanceChart();
-}
-
-function calculateDashboardStats() {
-    const grades = GradeX.getAllGradesWithDetails();
-    const passingGrades = grades.filter(g => g.total >= GradeX.state.settings.passingGrade);
-    return {
-        totalStudents: GradeX.students.length,
-        studentChange: 12,
-        totalSubjects: GradeX.subjects.length,
-        subjectChange: 8,
-        totalGrades: grades.length,
-        gradeChange: 15,
-        passingRate: grades.length > 0 ? Math.round((passingGrades.length / grades.length) * 100) : 0,
-        passingChange: 5,
-        averageGrade: grades.length > 0 ? Math.round(grades.reduce((sum, g) => sum + g.total, 0) / grades.length) : 0,
-        activeTeachers: 6
-    };
 }
 
 function loadRecentGrades() {

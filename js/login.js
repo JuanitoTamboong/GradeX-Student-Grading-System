@@ -24,8 +24,7 @@ function handleLogin(e) {
     
     const users = [
         { id: 1, name: 'Admin User', email: 'admin@gradex.com', password: 'admin123', role: 'admin', avatar: 'A' },
-        { id: 2, name: 'Dr. Sarah Johnson', email: 'teacher@gradex.com', password: 'teacher123', role: 'teacher', avatar: 'S' },
-        { id: 3, name: 'John Doe', email: 'student@gradex.com', password: 'student123', role: 'student', avatar: 'J' }
+        { id: 2, name: 'Dr. Sarah Johnson', email: 'teacher@gradex.com', password: 'teacher123', role: 'teacher', avatar: 'S' }
     ];
     
     const user = users.find(u => u.email === email && u.password === password);
