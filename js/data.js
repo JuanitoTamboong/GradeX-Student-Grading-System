@@ -19,12 +19,9 @@ const GradeX = {
     },
 
     // ==========================================
-    // USERS (preserved for login)
+    // USERS (loaded from database via API)
     // ==========================================
-    users: [
-        { id: 1, name: 'Admin User', email: 'admin@gradex.com', password: 'admin123', role: 'admin', avatar: 'A' },
-        { id: 2, name: 'Dr. Sarah Johnson', email: 'teacher@gradex.com', password: 'teacher123', role: 'teacher', avatar: 'S' }
-    ],
+    users: [],
 
     // ==========================================
     // EMPTY DATA COLLECTIONS (add via UI)

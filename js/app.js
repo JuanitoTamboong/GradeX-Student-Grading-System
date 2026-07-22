@@ -88,15 +88,39 @@ function handleLogin(e) {
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value.trim();
     
-    const user = GradeX.users.find(u => u.email === email && u.password === password);
-    
-    if (user) {
-        GradeX.state.currentUser = user;
-        showApp(user);
-        showToast(`Welcome back, ${user.name}!`, 'success');
-    } else {
-        showToast('Invalid email or password!', 'error');
+    // Show loading state
+    const btn = document.querySelector('.btn-login');
+    if (btn) {
+        btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
+        btn.disabled = true;
     }
+    
+    fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            GradeX.state.currentUser = data.user;
+            GradeX.users.push(data.user);
+            showApp(data.user);
+            showToast(`Welcome back, ${data.user.name}!`, 'success');
+        } else {
+            showToast(data.message || 'Invalid email or password!', 'error');
+        }
+    })
+    .catch(err => {
+        console.error('Login error:', err);
+        showToast('Unable to connect to server. Please try again.', 'error');
+    })
+    .finally(() => {
+        if (btn) {
+            btn.innerHTML = '<i class="fas fa-sign-in-alt"></i> Sign In';
+            btn.disabled = false;
+        }
+    });
 }
 
 function handleLogout() {
@@ -123,11 +147,6 @@ function showApp(user) {
     
     // Navigate to dashboard
     navigateTo('dashboard');
-}
-
-function fillCredentials(email, password) {
-    document.getElementById('email').value = email;
-    document.getElementById('password').value = password;
 }
 
 // ==========================================

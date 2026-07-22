@@ -22,28 +22,38 @@ function handleLogin(e) {
     const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value.trim();
     
-    const users = [
-        { id: 1, name: 'Admin User', email: 'admin@gradex.com', password: 'admin123', role: 'admin', avatar: 'A' },
-        { id: 2, name: 'Dr. Sarah Johnson', email: 'teacher@gradex.com', password: 'teacher123', role: 'teacher', avatar: 'S' }
-    ];
+    // Show loading state
+    const btn = document.querySelector('.btn-login');
+    const originalText = btn.innerHTML;
+    btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
+    btn.disabled = true;
     
-    const user = users.find(u => u.email === email && u.password === password);
-    
-    if (user) {
-        localStorage.setItem('gradexUser', JSON.stringify(user));
-        showToast(`Welcome back, ${user.name}!`, 'success');
-        
-        setTimeout(() => {
-            window.location.href = 'dashboard.html';
-        }, 800);
-    } else {
-        showToast('Invalid email or password!', 'error');
-    }
-}
-
-function fillCredentials(email, password) {
-    document.getElementById('email').value = email;
-    document.getElementById('password').value = password;
+    fetch('/api/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email, password })
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.success) {
+            localStorage.setItem('gradexUser', JSON.stringify(data.user));
+            showToast(`Welcome back, ${data.user.name}!`, 'success');
+            
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 800);
+        } else {
+            showToast(data.message || 'Invalid email or password!', 'error');
+        }
+    })
+    .catch(err => {
+        console.error('Login error:', err);
+        showToast('Unable to connect to server. Please try again.', 'error');
+    })
+    .finally(() => {
+        btn.innerHTML = originalText;
+        btn.disabled = false;
+    });
 }
 
 function showToast(message, type = 'info') {
