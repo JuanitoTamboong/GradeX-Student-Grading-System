@@ -4,80 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>GradeX - Sign In</title>
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div id="loginPage" class="page active">
+    <div class="login-wrapper">
         <div class="login-container">
+            <!-- Left Side: Mascot Display -->
             <div class="login-left">
-                <div class="login-shapes">
-                    <div class="login-shape"></div>
-                    <div class="login-shape"></div>
-                    <div class="login-shape"></div>
-                </div>
-                <div class="login-branding">
-                    <img src="assets/GradeX-logo.png" alt="GradeX Logo" class="login-logo" onerror="this.style.display='none'">
-                    <h1 class="login-title">GradeX</h1>
-                    <p class="login-subtitle">Student Grading System</p>
-                    <p class="login-tagline">Smarter Grades. Faster Results.</p>
-                </div>
-                <div class="login-features">
-                    <div class="login-feature">
-                        <i class="fas fa-calculator"></i>
-                        <span>Automatic Grade Computation</span>
-                    </div>
-                    <div class="login-feature">
-                        <i class="fas fa-chart-line"></i>
-                        <span>Performance Tracking</span>
-                    </div>
-                    <div class="login-feature">
-                        <i class="fas fa-shield-alt"></i>
-                        <span>Secure Role-Based Access</span>
-                    </div>
-                </div>
+                <img src="assets/GradeX-Avatar.png" alt="GradeX Anime Mascot" class="mascot-img">
             </div>
+
+            <!-- Right Side: Form Content -->
             <div class="login-right">
                 <div class="login-form-wrapper">
-                    <div class="login-form-header">
+                    <!-- Header & Branding -->
+                    <div class="login-header">
+                        <div class="brand-logo">
+                            <i class="fas fa-graduation-cap"></i>
+                            <span>GRADEX</span>
+                        </div>
                         <h2>Welcome Back</h2>
-                        <p>Sign in to your account</p>
+                        <p class="subtitle">Please enter your credentials to log in.</p>
                     </div>
+
+                    <!-- Login Form -->
                     <form id="loginForm" class="login-form">
                         <div class="form-group">
-                            <label for="email"><i class="fas fa-envelope"></i> Email</label>
-                            <input type="email" id="email" placeholder="Enter your email" required>
+                            <label for="email">Email</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-envelope input-icon"></i>
+                                <input type="email" id="email" placeholder="Enter your email" required>
+                            </div>
                         </div>
+
                         <div class="form-group">
-                            <label for="password"><i class="fas fa-lock"></i> Password</label>
-                            <div class="password-wrapper">
+                            <label for="password">Password</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-lock input-icon"></i>
                                 <input type="password" id="password" placeholder="Enter your password" required>
                                 <button type="button" id="passwordToggle" class="password-toggle" aria-label="Show password">
                                     <i class="fas fa-eye"></i>
                                 </button>
                             </div>
                         </div>
+
                         <div class="form-options">
                             <label class="checkbox-label">
                                 <input type="checkbox" id="rememberMe">
-                                <span>Remember me</span>
+                                <span class="custom-checkbox"></span>
+                                Remember me
                             </label>
                             <a href="#" class="forgot-password">Forgot Password?</a>
                         </div>
+
                         <button type="submit" class="btn-login">
-                            <i class="fas fa-sign-in-alt"></i> Sign In
+                            Sign In <i class="fas fa-arrow-right"></i>
                         </button>
                     </form>
-
                 </div>
             </div>
         </div>
     </div>
 
+    <!-- Toast Notifications Container -->
     <div class="toast-container" id="toastContainer"></div>
 
     <script src="js/login.js"></script>
 </body>
 </html>
-

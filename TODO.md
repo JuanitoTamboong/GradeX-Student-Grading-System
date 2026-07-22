@@ -1,18 +1,10 @@
-# TODO - Remove Backend & Make Fully Client-Side
+# Task: Separate Login CSS from Dashboard CSS
 
-## Steps
-- [x] 1. Analyze current architecture - found server dependency in `js/login.js` (`fetch('/api/login')`)
-- [x] 2. Remove `fetch('/api/login', ...)` from `js/login.js` - replaced with client-side authentication
-- [x] 3. Login now works purely on the frontend via `http://127.0.0.1:5500/login.html`
-- [x] 4. Added auto-redirect if user is already logged in
-- [x] 5. No server/backend needed - all data stored in localStorage
-
-## Test Accounts
-- **Admin:** admin@gradex.com / admin123
-- **Teacher:** teacher@gradex.com / teacher123
-
-## Running
-- Open `http://127.0.0.1:5500/login.html` using Live Server (or open `index.html` → splash → `login.html`)
-- No need to run `node server.js` or `npm start`
-- No need for SQLite, Express, or any backend
+## Steps:
+- [x] Step 1: `login.css` is already self-contained (has its own variables, reset, styles, responsive)
+- [x] Step 2: Remove `login-style.css` (was a duplicate wrapper) — DELETED
+- [x] Step 3: Clean `style.css` — removed `@import url('login.css')` and legacy login CSS blocks
+- [x] Step 4: Clean `responsive.css` — removed login-specific responsive styles
+- [x] Step 5: Update `login.html` — now links directly to `css/login.css`
+- [x] Step 6: `style.css` no longer contains any login styles — completely isolated
 
