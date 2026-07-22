@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GradeX - Dashboard</title>
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app" class="page active">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="sidebar-header">
+                <img src="assets/gradeX-logo1.png" alt="GradeX" class="sidebar-logo" onerror="this.style.display='none'">
+                <div class="sidebar-brand">
+                    <h2>GradeX</h2>
+                    <span>Grading System</span>
+                </div>
+            </div>
+            <nav class="sidebar-nav">
+                <div class="nav-section-label">Main Menu</div>
+                <a href="#" class="nav-item active" data-page="dashboard">
+                    <i class="fas fa-th-large"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" data-page="students">
+                    <i class="fas fa-user-graduate"></i>
+                    <span>Students</span>
+                </a>
+                <a href="#" class="nav-item" data-page="grades">
+                    <i class="fas fa-graduation-cap"></i>
+                    <span>Grades</span>
+                </a>
+                <div class="nav-section-label">Academics</div>
+                <a href="#" class="nav-item" data-page="subjects">
+                    <i class="fas fa-book"></i>
+                    <span>Subjects</span>
+                </a>
+                <a href="#" class="nav-item" data-page="reports">
+                    <i class="fas fa-file-alt"></i>
+                    <span>Reports</span>
+                    <span class="nav-badge">4</span>
+                </a>
+                <div class="nav-section-label">System</div>
+                <a href="#" class="nav-item" data-page="settings">
+                    <i class="fas fa-cog"></i>
+                    <span>Settings</span>
+                </a>
+            </nav>
+            <div class="sidebar-footer">
+                <div class="user-info">
+                    <div class="user-avatar" id="userAvatar">A</div>
+                    <div class="user-details">
+                        <span class="user-name" id="userName">Admin</span>
+                        <span class="user-role" id="userRole">Administrator</span>
+                    </div>
+                </div>
+                <button class="btn-logout" id="logoutBtn" title="Sign Out">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Top Bar -->
+            <header class="topbar">
+                <button class="menu-toggle" id="menuToggle" title="Toggle Menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <div class="topbar-search">
+                    <i class="fas fa-search"></i>
+                    <input type="text" placeholder="Search students, subjects..." id="globalSearch">
+                </div>
+                <div class="topbar-actions">
+                    <button class="btn-icon" title="Notifications">
+                        <i class="fas fa-bell"></i>
+                        <span class="notification-badge">3</span>
+                    </button>
+                    <button class="btn-icon" title="Messages">
+                        <i class="fas fa-envelope"></i>
+                    </button>
+                </div>
+            </header>
+
+            <!-- Page Contents -->
+            <div class="content-area">
+                <!-- Dashboard Page -->
+                <div id="page-dashboard" class="page-content active">
+                    <div class="page-header">
+                        <div class="page-header-content">
+                            <h1>Dashboard</h1>
+                            <p>Overview of your academic system</p>
+                        </div>
+                    </div>
+                    <div class="stats-grid" id="dashboardStats">
+                        <!-- Populated by JS -->
+                    </div>
+                    <div class="dashboard-grid">
+                        <div class="card recent-grades">
+                            <div class="card-header">
+                                <h3><i class="fas fa-clock"></i> Recent Grades</h3>
+                                <a href="#" class="card-link" onclick="navigateTo('grades')">View All</a>
+                            </div>
+                            <div class="card-body">
+                                <table class="table" id="recentGradesTable">
+                                    <thead>
+                                        <tr>
+                                            <th>Student</th>
+                                            <th>Subject</th>
+                                            <th>Grade</th>
+                                            <th>Status</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="recentGradesBody">
+                                        <!-- Populated by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div class="card performance-chart">
+                            <div class="card-header">
+                                <h3><i class="fas fa-chart-bar"></i> Performance Overview</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="chart-container">
+                                    <canvas id="performanceChart"></canvas>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Students Page -->
+                <div id="page-students" class="page-content">
+                    <div class="page-header">
+                        <div class="page-header-content">
+                            <h1>Students</h1>
+                            <p>Manage student records</p>
+                        </div>
+                        <div class="header-actions">
+                            <button class="btn btn-primary" onclick="showAddStudentModal()">
+                                <i class="fas fa-plus"></i> Add Student
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-toolbar">
+                                <div class="search-box">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" id="studentSearch" placeholder="Search students..." oninput="filterStudents()">
+                                </div>
+                                <select id="studentFilter" onchange="filterStudents()" title="Filter by Year">
+                                    <option value="all">All Years</option>
+                                    <option value="1st Year">1st Year</option>
+                                    <option value="2nd Year">2nd Year</option>
+                                    <option value="3rd Year">3rd Year</option>
+                                    <option value="4th Year">4th Year</option>
+                                </select>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>ID</th>
+                                            <th>Name</th>
+                                            <th>Email</th>
+                                            <th>Year</th>
+                                            <th>Course</th>
+                                            <th>GPA</th>
+                                            <th>Status</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="studentsTableBody">
+                                        <!-- Populated by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Grades Page -->
+                <div id="page-grades" class="page-content">
+                    <div class="page-header">
+                        <div class="page-header-content">
+                            <h1>Grades</h1>
+                            <p>Manage and compute student grades</p>
+                        </div>
+                        <div class="header-actions">
+                            <button class="btn btn-primary" onclick="showAddGradeModal()">
+                                <i class="fas fa-plus"></i> Add Grade
+                            </button>
+                            <button class="btn btn-success" onclick="computeAllGrades()">
+                                <i class="fas fa-sync-alt"></i> Compute All
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-toolbar">
+                                <div class="search-box">
+                                    <i class="fas fa-search"></i>
+                                    <input type="text" id="gradeSearch" placeholder="Search grades..." oninput="filterGrades()">
+                                </div>
+                                <select id="gradeSubjectFilter" onchange="filterGrades()" title="Filter by Subject">
+                                    <option value="all">All Subjects</option>
+                                </select>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Student</th>
+                                            <th>Subject</th>
+                                            <th>Quiz (20%)</th>
+                                            <th>Assignment (20%)</th>
+                                            <th>Project (30%)</th>
+                                            <th>Exam (30%)</th>
+                                            <th>Total</th>
+                                            <th>Grade</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="gradesTableBody">
+                                        <!-- Populated by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Subjects Page -->
+                <div id="page-subjects" class="page-content">
+                    <div class="page-header">
+                        <div class="page-header-content">
+                            <h1>Subjects</h1>
+                            <p>Manage subjects and courses</p>
+                        </div>
+                        <div class="header-actions">
+                            <button class="btn btn-primary" onclick="showAddSubjectModal()">
+                                <i class="fas fa-plus"></i> Add Subject
+                            </button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div class="card-body">
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Code</th>
+                                            <th>Subject Name</th>
+                                            <th>Instructor</th>
+                                            <th>Credits</th>
+                                            <th>Students Enrolled</th>
+                                            <th>Actions</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody id="subjectsTableBody">
+                                        <!-- Populated by JS -->
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Reports Page -->
+                <div id="page-reports" class="page-content">
+                    <div class="page-header">
+                        <div class="page-header-content">
+                            <h1>Reports</h1>
+                            <p>Generate academic reports and transcripts</p>
+                        </div>
+                    </div>
+                    <div class="reports-grid">
+                        <div class="card report-card" onclick="generateReport('class')">
+                            <div class="report-icon">
+                                <i class="fas fa-users"></i>
+                            </div>
+                            <h3>Class Performance Report</h3>
+                            <p>View overall class performance across all subjects</p>
+                        </div>
+                        <div class="card report-card" onclick="generateReport('student')">
+                            <div class="report-icon">
+                                <i class="fas fa-user-graduate"></i>
+                            </div>
+                            <h3>Student Transcript</h3>
+                            <p>Generate individual student transcript</p>
+                        </div>
+                        <div class="card report-card" onclick="generateReport('subject')">
+                            <div class="report-icon">
+                                <i class="fas fa-book"></i>
+                            </div>
+                            <h3>Subject Analysis</h3>
+                            <p>Analyze performance per subject</p>
+                        </div>
+                        <div class="card report-card" onclick="generateReport('summary')">
+                            <div class="report-icon">
+                                <i class="fas fa-chart-pie"></i>
+                            </div>
+                            <h3>Summary Report</h3>
+                            <p>Comprehensive academic summary</p>
+                        </div>
+                    </div>
+                    <div class="card" id="reportResult" style="display:none;">
+                        <div class="card-header">
+                            <h3><i class="fas fa-file-alt"></i> Report Result</h3>
+                            <div class="header-actions">
+                                <button class="btn btn-secondary" onclick="printReport()">
+                                    <i class="fas fa-print"></i> Print
+                                </button>
+                                <button class="btn btn-secondary" onclick="closeReport()">
+                                    <i class="fas fa-times"></i> Close
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card-body" id="reportContent">
+                            <!-- Populated by JS -->
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings Page -->
+                <div id="page-settings" class="page-content">
+                    <div class="page-header">
+                        <div class="page-header-content">
+                            <h1>Settings</h1>
+                            <p>Configure system preferences</p>
+                        </div>
+                    </div>
+                    <div class="settings-grid">
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-school"></i> General Settings</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="setting-item">
+                                    <label>School Name</label>
+                                    <input type="text" id="schoolName" value="GradeX University">
+                                </div>
+                                <div class="setting-item">
+                                    <label>Academic Year</label>
+                                    <input type="text" id="academicYear" value="2024-2025">
+                                </div>
+                                <div class="setting-item">
+                                    <label>Passing Grade (%)</label>
+                                    <input type="number" id="passingGrade" value="60" min="0" max="100">
+                                </div>
+                                <div class="setting-item">
+                                    <label>Grade Scheme</label>
+                                    <select id="gradeScheme">
+                                        <option value="A-F">A-F (Letter Grades)</option>
+                                        <option value="numeric">Numeric (1.0-5.0)</option>
+                                        <option value="pass-fail">Pass/Fail</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-calculator"></i> Grade Weights</h3>
+                            </div>
+                            <div class="card-body">
+                                <div class="setting-item">
+                                    <label>Quiz Weight (%)</label>
+                                    <input type="number" id="quizWeight" value="20" min="0" max="100">
+                                </div>
+                                <div class="setting-item">
+                                    <label>Assignment Weight (%)</label>
+                                    <input type="number" id="assignmentWeight" value="20" min="0" max="100">
+                                </div>
+                                <div class="setting-item">
+                                    <label>Project Weight (%)</label>
+                                    <input type="number" id="projectWeight" value="30" min="0" max="100">
+                                </div>
+                                <div class="setting-item">
+                                    <label>Exam Weight (%)</label>
+                                    <input type="number" id="examWeight" value="30" min="0" max="100">
+                                </div>
+                                <button class="btn btn-primary btn-block" onclick="saveSettings()">
+                                    <i class="fas fa-save"></i> Save Settings
+                                </button>
+                            </div>
+                        </div>
+                        <div class="card">
+                            <div class="card-header">
+                                <h3><i class="fas fa-database"></i> Data Management</h3>
+                            </div>
+                            <div class="card-body">
+                                <button class="btn btn-secondary btn-block" onclick="exportData()">
+                                    <i class="fas fa-download"></i> Export Data
+                                </button>
+                                <button class="btn btn-warning btn-block" onclick="importData()" style="margin-top:8px;">
+                                    <i class="fas fa-upload"></i> Import Data
+                                </button>
+                                <button class="btn btn-danger btn-block" onclick="resetData()" style="margin-top:8px;">
+                                    <i class="fas fa-trash"></i> Reset All Data
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Modals -->
+    <div class="modal-overlay" id="modalOverlay">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <h3 id="modalTitle">Modal Title</h3>
+                <button class="modal-close" onclick="closeModal()">&times;</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Populated by JS -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast-container" id="toastContainer"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="js/data.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
+
