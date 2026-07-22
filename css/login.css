@@ -387,22 +387,581 @@ body {
     to { opacity: 0; transform: translateX(100%); }
 }
 
-/* Responsive Behavior */
+/* ==========================================
+   GradeX - Login Responsive Styles
+   ========================================== */
+
+/* Small Laptops / Large Tablets */
+@media (max-width: 1024px) {
+    .login-container {
+        max-width: 960px;
+        height: 600px;
+    }
+
+    .login-left {
+        clip-path: ellipse(130% 100% at 0% 50%);
+    }
+
+    .speech-bubble {
+        top: 14%;
+        right: 5%;
+        font-size: 13px;
+        padding: 10px 16px;
+        max-width: 170px;
+    }
+
+    .login-right {
+        padding: 32px 36px;
+    }
+
+    .brand-logo {
+        font-size: 24px;
+    }
+}
+
+/* Tablets Portrait & Small Laptops */
 @media (max-width: 900px) {
     .login-container {
         flex-direction: column;
         height: auto;
         max-width: 480px;
         margin: 20px;
+        border-radius: 20px;
     }
 
     .login-left {
         height: 220px;
         clip-path: none;
+        border-radius: 20px 20px 0 0;
+    }
+
+    .mascot-img {
+        object-position: center 30%;
+    }
+
+    .particle {
+        opacity: 0.5;
+    }
+
+    .speech-bubble {
+        top: 12%;
+        right: 6%;
+        font-size: 13px;
+        padding: 10px 14px;
+        max-width: 160px;
     }
 
     .login-right {
         padding: 32px 24px;
     }
 }
+
+/* Mobile Landscape / Small Tablets */
+@media (max-width: 768px) {
+    .login-wrapper {
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+        align-items: flex-start;
+        padding: 0;
+    }
+
+    .login-container {
+        max-width: 100%;
+        margin: 0;
+        border-radius: 0;
+        min-height: 100vh;
+        min-height: 100dvh;
+        box-shadow: none;
+    }
+
+    .login-left {
+        height: 180px;
+        border-radius: 0;
+    }
+
+    .mascot-container {
+        height: 100%;
+    }
+
+    .mascot-img {
+        object-fit: cover;
+        object-position: center 20%;
+    }
+
+    .particle {
+        opacity: 0.35;
+    }
+
+    .speech-bubble {
+        top: 10%;
+        right: 5%;
+        font-size: 12px;
+        padding: 8px 12px;
+        max-width: 140px;
+        border-radius: 14px 14px 14px 4px;
+    }
+
+    .speech-bubble::after {
+        left: 18px;
+        bottom: -8px;
+        border-left: 8px solid transparent;
+        border-right: 8px solid transparent;
+        border-top: 10px solid white;
+    }
+
+    .login-right {
+        padding: 28px 24px;
+    }
+
+    .login-form-wrapper {
+        max-width: 100%;
+    }
+
+    .login-header h2 {
+        font-size: 22px;
+    }
+
+    .brand-logo {
+        font-size: 22px;
+    }
+
+    .brand-logo img {
+        width: 42px;
+    }
+
+    .login-header {
+        margin-bottom: 24px;
+    }
+
+    .form-group {
+        margin-bottom: 16px;
+    }
+
+    .form-group input {
+        padding: 13px 16px 13px 42px;
+        font-size: 16px; /* Prevent iOS zoom on focus */
+    }
+
+    .btn-login {
+        padding: 14px;
+        font-size: 15px;
+    }
+
+    .form-options {
+        margin-bottom: 24px;
+    }
+}
+
+/* Mobile Portrait - Large Phones */
+@media (max-width: 640px) {
+    .login-left {
+        height: 160px;
+    }
+
+    .mascot-img {
+        object-position: center 25%;
+    }
+
+    .particles-bg .particle {
+        display: none;
+    }
+
+    /* Show only 2 particles for subtle effect */
+    .particles-bg .p1,
+    .particles-bg .p5 {
+        display: block;
+        opacity: 0.3;
+    }
+
+    .speech-bubble {
+        top: 8%;
+        right: 4%;
+        font-size: 11px;
+        padding: 7px 10px;
+        max-width: 120px;
+    }
+
+    .login-right {
+        padding: 24px 20px;
+    }
+
+    .login-header {
+        margin-bottom: 20px;
+    }
+
+    .login-header h2 {
+        font-size: 20px;
+    }
+
+    .login-header .subtitle {
+        font-size: 13px;
+    }
+
+    .brand-logo {
+        font-size: 20px;
+    }
+
+    .brand-logo img {
+        width: 38px;
+    }
+
+    .form-group label {
+        font-size: 12px;
+    }
+
+    .form-group input {
+        padding: 12px 14px 12px 40px;
+        font-size: 16px; /* Prevent iOS zoom */
+        border-radius: 8px;
+    }
+
+    .input-icon {
+        left: 14px;
+        font-size: 14px;
+    }
+
+    .btn-login {
+        padding: 13px;
+        font-size: 14px;
+    }
+
+    .toast {
+        min-width: auto;
+        max-width: calc(100vw - 40px);
+        font-size: 13px;
+        padding: 14px 18px;
+    }
+
+    .toast-container {
+        right: 16px;
+        left: 16px;
+        bottom: 16px;
+    }
+}
+
+/* Small Mobile Phones */
+@media (max-width: 480px) {
+    .login-left {
+        height: 140px;
+    }
+
+    .mascot-img {
+        object-position: center 30%;
+    }
+
+    .particles-bg .p1,
+    .particles-bg .p5 {
+        display: none;
+    }
+
+    .speech-bubble {
+        top: 6%;
+        right: 4%;
+        font-size: 10px;
+        padding: 6px 10px;
+        max-width: 100px;
+        border-radius: 12px 12px 12px 3px;
+        line-height: 1.3;
+    }
+
+    .speech-bubble::after {
+        display: none;
+    }
+
+    .login-right {
+        padding: 20px 16px;
+    }
+
+    .login-header h2 {
+        font-size: 18px;
+    }
+
+    .brand-logo {
+        font-size: 18px;
+    }
+
+    .brand-logo img {
+        width: 34px;
+    }
+
+    .form-group {
+        margin-bottom: 14px;
+    }
+
+    .form-group input {
+        padding: 11px 12px 11px 38px;
+        font-size: 16px;
+    }
+
+    .input-icon {
+        left: 12px;
+        font-size: 13px;
+    }
+
+    .password-toggle {
+        font-size: 13px;
+        right: 12px;
+    }
+
+    .btn-login {
+        padding: 12px;
+        font-size: 13px;
+        border-radius: 8px;
+    }
+
+    .form-options {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+        margin-bottom: 20px;
+        font-size: 12px;
+    }
+
+    .checkbox-label {
+        font-size: 12px;
+    }
+
+    .forgot-password {
+        font-size: 12px;
+    }
+}
+
+/* Extra Small / Very Compact Phones */
+@media (max-width: 360px) {
+    .login-left {
+        height: 120px;
+    }
+
+    .speech-bubble {
+        display: none;
+    }
+
+    .login-right {
+        padding: 16px 12px;
+    }
+
+    .login-header {
+        margin-bottom: 16px;
+    }
+
+    .login-header h2 {
+        font-size: 16px;
+    }
+
+    .login-header .subtitle {
+        font-size: 12px;
+    }
+
+    .brand-logo {
+        font-size: 16px;
+    }
+
+    .brand-logo img {
+        width: 30px;
+    }
+
+    .form-group {
+        margin-bottom: 12px;
+    }
+
+    .form-group label {
+        font-size: 11px;
+        margin-bottom: 6px;
+    }
+
+    .form-group input {
+        padding: 10px 10px 10px 34px;
+        font-size: 14px;
+    }
+
+    .input-icon {
+        left: 10px;
+        font-size: 12px;
+    }
+
+    .password-toggle {
+        font-size: 12px;
+        right: 10px;
+    }
+
+    .btn-login {
+        padding: 11px;
+        font-size: 12px;
+        gap: 6px;
+    }
+
+    .form-options {
+        margin-bottom: 16px;
+    }
+
+    .toast {
+        font-size: 12px;
+        padding: 12px 14px;
+        gap: 8px;
+    }
+
+    .toast i {
+        font-size: 16px;
+    }
+}
+
+/* Landscape Orientation - Mobile */
+@media (max-height: 600px) and (orientation: landscape) {
+    .login-wrapper {
+        align-items: center;
+        padding: 12px;
+        height: auto;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+
+    .login-container {
+        flex-direction: row;
+        height: auto;
+        min-height: auto;
+        max-width: 700px;
+        border-radius: 16px;
+        margin: 0;
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    .login-left {
+        flex: 0 0 280px;
+        height: auto;
+        min-height: 320px;
+        clip-path: ellipse(140% 100% at 0% 50%);
+        border-radius: 16px 0 0 16px;
+    }
+
+    .mascot-img {
+        object-fit: cover;
+        object-position: center 30%;
+    }
+
+    .speech-bubble {
+        top: 8%;
+        right: 4%;
+        font-size: 11px;
+        padding: 6px 10px;
+        max-width: 110px;
+    }
+
+    .speech-bubble::after {
+        display: none;
+    }
+
+    .particles-bg .particle {
+        opacity: 0.25;
+    }
+
+    .login-right {
+        flex: 1;
+        padding: 24px 28px;
+        overflow-y: auto;
+    }
+
+    .login-form-wrapper {
+        max-width: 340px;
+    }
+
+    .login-header {
+        margin-bottom: 16px;
+    }
+
+    .login-header h2 {
+        font-size: 18px;
+    }
+
+    .brand-logo {
+        font-size: 18px;
+    }
+
+    .brand-logo img {
+        width: 34px;
+    }
+
+    .form-group {
+        margin-bottom: 12px;
+    }
+
+    .form-group input {
+        padding: 10px 12px 10px 36px;
+        font-size: 14px;
+    }
+
+    .input-icon {
+        font-size: 12px;
+        left: 12px;
+    }
+
+    .btn-login {
+        padding: 10px;
+        font-size: 13px;
+    }
+
+    .form-options {
+        margin-bottom: 16px;
+    }
+}
+
+/* iOS Notch / Safe Area support */
+@supports (padding: env(safe-area-inset-bottom)) {
+    .login-wrapper {
+        padding-left: env(safe-area-inset-left);
+        padding-right: env(safe-area-inset-right);
+    }
+
+    .login-right {
+        padding-left: calc(40px + env(safe-area-inset-left));
+        padding-right: calc(40px + env(safe-area-inset-right));
+    }
+
+    @media (max-width: 768px) {
+        .login-right {
+            padding-left: calc(24px + env(safe-area-inset-left));
+            padding-right: calc(24px + env(safe-area-inset-right));
+        }
+    }
+
+    @media (max-width: 480px) {
+        .login-right {
+            padding-left: calc(16px + env(safe-area-inset-left));
+            padding-right: calc(16px + env(safe-area-inset-right));
+        }
+    }
+}
+
+/* High DPI / Retina Fine-tuning */
+@media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
+    .login-container {
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
+    }
+}
+
+/* Reduced Motion Preference */
+@media (prefers-reduced-motion: reduce) {
+    .particle {
+        animation: none !important;
+        opacity: 0.3;
+    }
+
+    .mascot-wave {
+        animation: none !important;
+    }
+
+    .speech-bubble {
+        animation: none !important;
+    }
+
+    .btn-login {
+        transition: none;
+    }
+
+    .btn-login:hover {
+        transform: none;
+    }
+}
+
+
 
