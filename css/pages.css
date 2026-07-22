@@ -1,0 +1,149 @@
+/* ==========================================
+   GradeX - Page-Specific Styles
+   ========================================== */
+
+/* ===== DASHBOARD ===== */
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: 1.6fr 1fr;
+    gap: 22px;
+}
+
+.chart-container {
+    position: relative;
+    height: 320px;
+    width: 100%;
+}
+
+/* ===== REPORTS ===== */
+.reports-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    gap: 18px;
+    margin-bottom: 28px;
+}
+
+.report-card {
+    padding: 28px 24px;
+    text-align: center;
+    cursor: pointer;
+    transition: var(--transition-base);
+    border: 1px solid var(--gray-100);
+}
+
+.report-card:hover {
+    transform: translateY(-5px);
+    box-shadow: var(--shadow-xl);
+    border-color: var(--primary-lightest);
+}
+
+.report-icon {
+    width: 72px;
+    height: 72px;
+    border-radius: 18px;
+    background: linear-gradient(135deg, var(--primary), var(--primary-light));
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 30px;
+    margin: 0 auto 20px;
+    box-shadow: 0 8px 24px rgba(79, 70, 229, 0.25);
+    transition: var(--transition-base);
+}
+
+.report-card:hover .report-icon {
+    transform: scale(1.05) rotate(-5deg);
+}
+
+.report-card h3 {
+    font-size: 17px;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 10px;
+}
+
+.report-card p {
+    font-size: 13px;
+    color: var(--gray-500);
+    line-height: 1.5;
+}
+
+/* Report Result */
+.report-header {
+    text-align: center;
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 2px solid var(--gray-200);
+}
+
+.report-header h2 {
+    color: var(--gray-900);
+    margin-bottom: 4px;
+}
+
+.report-header p {
+    color: var(--gray-500);
+    font-size: 13px;
+}
+
+/* ===== SETTINGS ===== */
+.settings-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
+    gap: 22px;
+}
+
+.settings-grid .card .card-body {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.setting-item {
+    margin-bottom: 18px;
+}
+
+.setting-item label {
+    display: block;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--gray-600);
+    margin-bottom: 6px;
+}
+
+.setting-item input,
+.setting-item select {
+    width: 100%;
+    padding: 10px 14px;
+    border: 2px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    font-size: 14px;
+    font-family: inherit;
+    transition: var(--transition-base);
+    outline: none;
+    background: var(--gray-50);
+    color: var(--gray-800);
+}
+
+.setting-item input:focus,
+.setting-item select:focus {
+    border-color: var(--primary);
+    background: var(--white);
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.1);
+}
+
+/* ===== SELECT DROPDOWNS ===== */
+select {
+    appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' fill='%2364748b' viewBox='0 0 16 16'%3E%3Cpath d='M8 11L3 6h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 12px center;
+    padding-right: 36px;
+    cursor: pointer;
+}
+
+select:hover {
+    border-color: var(--gray-300);
+}
+

@@ -1,0 +1,244 @@
+/* ==========================================
+   GradeX - Responsive & Print Styles
+   ========================================== */
+
+/* ===== TABLETS & SMALL LAPTOPS ===== */
+@media (max-width: 1200px) {
+    .content-area {
+        padding: 24px;
+    }
+    
+    .dashboard-grid {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ===== TABLETS ===== */
+@media (max-width: 992px) {
+    .login-container {
+        flex-direction: column;
+    }
+    
+    .login-left {
+        padding: 40px 32px;
+        min-height: auto;
+        flex: none;
+    }
+    
+    .login-title {
+        font-size: 38px;
+    }
+    
+    .login-right {
+        padding: 32px 24px;
+    }
+    
+    .settings-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .reports-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+/* ===== MOBILE ===== */
+@media (max-width: 768px) {
+    .login-left {
+        padding: 28px 20px;
+    }
+    
+    .login-title {
+        font-size: 30px;
+    }
+    
+    .login-subtitle {
+        font-size: 15px;
+    }
+    
+    .login-tagline {
+        font-size: 14px;
+    }
+    
+    .login-features {
+        display: none;
+    }
+    
+    .login-form-wrapper {
+        max-width: 100%;
+    }
+    
+    .sidebar {
+        transform: translateX(-100%);
+        width: 280px;
+    }
+    
+    .sidebar.open {
+        transform: translateX(0);
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .menu-toggle {
+        display: block;
+    }
+    
+    .content-area {
+        padding: 18px 16px;
+    }
+    
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .page-header-content h1 {
+        font-size: 22px;
+    }
+    
+    .header-actions {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    
+    .header-actions .btn {
+        flex: 1;
+        justify-content: center;
+    }
+    
+    .stats-grid {
+        grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+        gap: 12px;
+    }
+    
+    .stat-card {
+        padding: 16px;
+    }
+    
+    .stat-icon {
+        width: 42px;
+        height: 42px;
+        font-size: 18px;
+    }
+    
+    .stat-info h3 {
+        font-size: 22px;
+    }
+    
+    .reports-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .topbar {
+        padding: 0 16px;
+        height: 60px;
+    }
+    
+    .topbar-search {
+        max-width: 100%;
+    }
+    
+    .modal {
+        max-width: 100%;
+        margin: 12px;
+        max-height: 85vh;
+    }
+    
+    .toast {
+        min-width: auto;
+        max-width: calc(100vw - 48px);
+    }
+    
+    .toast-container {
+        right: 16px;
+        bottom: 16px;
+        left: 16px;
+    }
+    
+    .card-body {
+        padding: 16px;
+    }
+    
+    .table th,
+    .table td {
+        padding: 10px 12px;
+        font-size: 13px;
+    }
+}
+
+/* ===== SMALL MOBILE ===== */
+@media (max-width: 480px) {
+    .login-left {
+        padding: 24px 16px;
+    }
+    
+    .login-title {
+        font-size: 26px;
+    }
+    
+    .login-form-header h2 {
+        font-size: 24px;
+    }
+    
+    .stats-grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 10px;
+    }
+    
+    .settings-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .btn {
+        padding: 8px 16px;
+        font-size: 13px;
+    }
+}
+
+/* ===== PRINT ===== */
+@media print {
+    .sidebar,
+    .topbar,
+    .menu-toggle,
+    .btn,
+    .btn-icon,
+    .btn-icon-sm,
+    .header-actions,
+    .table-toolbar,
+    .modal-overlay,
+    .toast-container,
+    .no-print {
+        display: none !important;
+    }
+    
+    .main-content {
+        margin-left: 0;
+    }
+    
+    .card {
+        box-shadow: none;
+        border: 1px solid var(--gray-300);
+        break-inside: avoid;
+    }
+    
+    .page-content {
+        display: block !important;
+    }
+    
+    body {
+        background: white;
+        font-size: 12px;
+    }
+    
+    .table th {
+        background: var(--gray-100);
+    }
+    
+    .content-area {
+        padding: 0;
+        max-width: 100%;
+    }
+}
+

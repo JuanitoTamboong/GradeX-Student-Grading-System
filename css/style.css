@@ -1,5 +1,19 @@
 /* ==========================================
    GradeX - Student Grading System Styles
+   Main Barrel: Imports all modular CSS files
+   ========================================== */
+
+@import url('variables.css');
+@import url('base.css');
+@import url('login.css');
+@import url('layout.css');
+@import url('components.css');
+@import url('pages.css');
+@import url('responsive.css');
+
+/* ==========================================
+   Legacy Styles (kept for backward compatibility)
+   Will be fully migrated to modular files
    ========================================== */
 
 :root {
