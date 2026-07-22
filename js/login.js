@@ -39,6 +39,30 @@ function initializeLogin() {
             closeModal();
         }
     });
+    
+    // Password visibility toggle
+    initializePasswordToggle();
+}
+
+function initializePasswordToggle() {
+    const toggleBtn = document.getElementById('passwordToggle');
+    const passwordInput = document.getElementById('password');
+    
+    if (!toggleBtn || !passwordInput) return;
+    
+    toggleBtn.addEventListener('click', () => {
+        const isPassword = passwordInput.type === 'password';
+        passwordInput.type = isPassword ? 'text' : 'password';
+        
+        const icon = toggleBtn.querySelector('i');
+        if (icon) {
+            icon.className = isPassword ? 'fas fa-eye-slash' : 'fas fa-eye';
+        }
+        
+        toggleBtn.setAttribute('aria-label', 
+            isPassword ? 'Hide password' : 'Show password'
+        );
+    });
 }
 
 function handleLogin(e) {
