@@ -1,8 +1,33 @@
 // ==========================================
-// GradeX - Login Module (Standalone)
+// GradeX - Login Module (Standalone - Client Side)
 // ==========================================
 
+// Pre-defined accounts (matching database credentials)
+const ACCOUNTS = [
+    {
+        name: 'Admin User',
+        email: 'admin@gradex.com',
+        password: 'admin123',
+        role: 'admin',
+        avatar: 'A'
+    },
+    {
+        name: 'Dr. Sarah Johnson',
+        email: 'teacher@gradex.com',
+        password: 'teacher123',
+        role: 'teacher',
+        avatar: 'S'
+    }
+];
+
 document.addEventListener('DOMContentLoaded', () => {
+    // Check if user is already logged in
+    const existingUser = localStorage.getItem('gradexUser');
+    if (existingUser) {
+        window.location.href = 'dashboard.html';
+        return;
+    }
+    
     initializeLogin();
 });
 
@@ -28,32 +53,32 @@ function handleLogin(e) {
     btn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Signing in...';
     btn.disabled = true;
     
-    fetch('/api/login', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ email, password })
-    })
-    .then(res => res.json())
-    .then(data => {
-        if (data.success) {
-            localStorage.setItem('gradexUser', JSON.stringify(data.user));
-            showToast(`Welcome back, ${data.user.name}!`, 'success');
+    // Simulate network delay for realistic UX
+    setTimeout(() => {
+        // Find matching account
+        const account = ACCOUNTS.find(a => a.email === email && a.password === password);
+        
+        if (account) {
+            const user = {
+                name: account.name,
+                email: account.email,
+                role: account.role,
+                avatar: account.avatar
+            };
+            
+            localStorage.setItem('gradexUser', JSON.stringify(user));
+            showToast(`Welcome back, ${user.name}!`, 'success');
             
             setTimeout(() => {
                 window.location.href = 'dashboard.html';
             }, 800);
         } else {
-            showToast(data.message || 'Invalid email or password!', 'error');
+            showToast('Invalid email or password!', 'error');
         }
-    })
-    .catch(err => {
-        console.error('Login error:', err);
-        showToast('Unable to connect to server. Please try again.', 'error');
-    })
-    .finally(() => {
+        
         btn.innerHTML = originalText;
         btn.disabled = false;
-    });
+    }, 600);
 }
 
 function showToast(message, type = 'info') {
