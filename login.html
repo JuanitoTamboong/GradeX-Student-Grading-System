@@ -15,6 +15,9 @@
             <div class="login-left">
                 <div class="mascot-container">
                     <img src="assets/gx-wave.png" alt="GradeX Anime Mascot" class="mascot-img mascot-wave">
+                    <div class="speech-bubble" id="speechBubble">
+                        <span id="greetingText"></span>
+                    </div>
                 </div>
             </div>
 
@@ -73,6 +76,28 @@
     <!-- Toast Notifications Container -->
     <div class="toast-container" id="toastContainer"></div>
 
+    <script>
+        // Set time-based greeting in speech bubble
+        document.addEventListener('DOMContentLoaded', function() {
+            const greetingEl = document.getElementById('greetingText');
+            if (!greetingEl) return;
+            
+            const hour = new Date().getHours();
+            let greeting = '';
+            
+            if (hour < 12) {
+                greeting = '👋 Hello! Good Morning';
+            } else if (hour < 17) {
+                greeting = '👋 Hello! Good Afternoon';
+            } else {
+                greeting = '👋 Hello! Good Evening';
+            }
+            
+            greetingEl.textContent = greeting;
+        });
+    </script>
+
     <script src="js/login.js"></script>
 </body>
 </html>
+

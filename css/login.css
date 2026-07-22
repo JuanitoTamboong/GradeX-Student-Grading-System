@@ -90,6 +90,52 @@ body {
     100% { transform: rotate(0deg); }
 }
 
+/* ===== Speech Bubble ===== */
+.speech-bubble {
+    position: absolute;
+    top: 18%;
+    right: 8%;
+    background: white;
+    color: #1e293b;
+    padding: 12px 18px;
+    border-radius: 18px 18px 18px 4px;
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow: 0 4px 16px rgba(0,0,0,0.12);
+    max-width: 200px;
+    z-index: 2;
+    animation: bubbleFloat 3s ease-in-out infinite, bubbleAppear 0.5s ease-out;
+    transform-origin: bottom left;
+}
+
+.speech-bubble::after {
+    content: '';
+    position: absolute;
+    bottom: -10px;
+    left: 24px;
+    width: 0;
+    height: 0;
+    border-left: 10px solid transparent;
+    border-right: 10px solid transparent;
+    border-top: 12px solid white;
+    filter: drop-shadow(0 2px 2px rgba(0,0,0,0.05));
+}
+
+#greetingText {
+    display: block;
+    line-height: 1.4;
+}
+
+@keyframes bubbleFloat {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-6px); }
+}
+
+@keyframes bubbleAppear {
+    from { opacity: 0; transform: scale(0.8) translateY(10px); }
+    to { opacity: 1; transform: scale(1) translateY(0); }
+}
+
 /* Right Side - Form Container */
 .login-right {
     flex: 1;
