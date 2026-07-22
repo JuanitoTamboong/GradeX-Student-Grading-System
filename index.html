@@ -9,57 +9,116 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="launcher">
-        <div class="launcher-bg">
-            <div class="launcher-shape"></div>
-            <div class="launcher-shape"></div>
-            <div class="launcher-shape"></div>
-        </div>
-        <div class="launcher-content">
-            <div class="launcher-brand">
-                <img src="assets/GradeX-logo.png" alt="GradeX" class="launcher-logo" onerror="this.style.display='none'">
-                <h1 class="launcher-title">GradeX</h1>
-                <p class="launcher-subtitle">Student Grading System</p>
-                <p class="launcher-tagline">Smarter Grades. Faster Results.</p>
+    <div class="splash">
+        <!-- Floating background particles -->
+        <div class="splash-particles">
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+            <div class="particle"></div>
+
+        <!-- Animated gradient rings -->
+        <div class="splash-rings">
+            <div class="ring ring-1"></div>
+            <div class="ring ring-2"></div>
+            <div class="ring ring-3"></div>
+
+        <!-- Main splash content -->
+        <div class="splash-content">
+            <!-- Logo with reveal animation -->
+            <div class="splash-logo-wrapper">
+                <div class="splash-logo-glow"></div>
+                <img src="assets/GradeX-logo.png" alt="GradeX" class="splash-logo" onerror="this.style.display='none'">
+                <div class="splash-logo-shimmer"></div>
+
+            <!-- Brand text with staggered animation -->
+            <div class="splash-text">
+                <h1 class="splash-title">GradeX</h1>
+                <p class="splash-subtitle">Student Grading System</p>
+                <p class="splash-tagline">Smarter Grades. Faster Results.</p>
             </div>
-            <div class="launcher-nav">
-                <a href="login.html" class="launcher-card login-card">
-                    <div class="launcher-icon">
-                        <i class="fas fa-sign-in-alt"></i>
-                    </div>
-                    <h3>Sign In</h3>
-                    <p>Access your account with role-based authentication</p>
-                    <span class="launcher-badge">Admin / Teacher / Student</span>
-                </a>
-                <a href="dashboard.html" class="launcher-card dashboard-card">
-                    <div class="launcher-icon">
-                        <i class="fas fa-th-large"></i>
-                    </div>
-                    <h3>Dashboard</h3>
-                    <p>View grades, reports, and academic analytics</p>
-                    <span class="launcher-badge">Requires Login</span>
-                </a>
+
+            <!-- Loading bar -->
+            <div class="splash-loader">
+                <div class="splash-loader-bar"></div>
+
+            <!-- Progress percentage -->
+            <div class="splash-progress">
+                <span class="splash-progress-text" id="progressText">0%</span>
             </div>
-            <div class="launcher-features">
-                <div class="launcher-feature">
-                    <i class="fas fa-calculator"></i>
-                    <span>Auto-Computation</span>
-                </div>
-                <div class="launcher-feature">
-                    <i class="fas fa-chart-line"></i>
-                    <span>Analytics</span>
-                </div>
-                <div class="launcher-feature">
-                    <i class="fas fa-shield-alt"></i>
-                    <span>Secure Access</span>
-                </div>
-                <div class="launcher-feature">
-                    <i class="fas fa-file-alt"></i>
-                    <span>Reports</span>
-                </div>
+
+        <!-- Footer -->
+        <div class="splash-footer">
+            <p>Where Grades Meet Innovation</p>
+            <div class="splash-dots">
+                <span class="dot active"></span>
+                <span class="dot"></span>
+                <span class="dot"></span>
             </div>
-        </div>
     </div>
+
+    <script>
+        // Splash screen animation with auto-redirect
+        document.addEventListener('DOMContentLoaded', () => {
+            const progressText = document.getElementById('progressText');
+            const logo = document.querySelector('.splash-logo');
+            const title = document.querySelector('.splash-title');
+            const subtitle = document.querySelector('.splash-subtitle');
+            const tagline = document.querySelector('.splash-tagline');
+            const loader = document.querySelector('.splash-loader-bar');
+            const dots = document.querySelectorAll('.dot');
+            
+            let progress = 0;
+            
+            // Phase 1: Logo reveal (0-30%)
+            setTimeout(() => {
+                logo.classList.add('revealed');
+            }, 200);
+            
+            // Phase 2: Text fade in (30-60%)
+            setTimeout(() => {
+                title.classList.add('revealed');
+            }, 600);
+            
+            setTimeout(() => {
+                subtitle.classList.add('revealed');
+            }, 1000);
+            
+            setTimeout(() => {
+                tagline.classList.add('revealed');
+            }, 1400);
+            
+            // Animate loading bar and progress
+            const interval = setInterval(() => {
+                progress += Math.floor(Math.random() * 8) + 3;
+                if (progress > 100) progress = 100;
+                
+                progressText.textContent = progress + '%';
+                loader.style.width = progress + '%';
+                
+                // Animate dots
+                dots.forEach((dot, i) => {
+                    const phase = Math.floor(progress / 34);
+                    dot.classList.toggle('active', i <= phase);
+                });
+                
+                if (progress >= 100) {
+                    clearInterval(interval);
+                    progressText.textContent = '100%';
+                    loader.style.width = '100%';
+                    
+                    // Add a brief pause then redirect
+                    setTimeout(() => {
+                        document.querySelector('.splash').classList.add('fade-out');
+                        setTimeout(() => {
+                            window.location.href = 'login.html';
+                        }, 600);
+                    }, 500);
+                }
+            }, 200);
+        });
+    </script>
 </body>
 </html>
-
